@@ -110,23 +110,24 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
         // output = (uint16_t)data;
         // data   = output;
         setHeading(atof(setPoint));
-        // break;
+        break;
     case 1:
         setHeadingBug(atof(setPoint));
         /* code */
-        // break;
+        break;
     case 2:
         /* code */
         setInstrumentBrightnessRatio(atof(setPoint));
-        // break;
+        break;
     case 100:
         /* code */
         setScreenRotation(atoi(setPoint));
-        // break;
+        break;
     default:
-        drawAll();
         break;
     }
+    analogWrite(TFT_BL, instrumentBrightness);
+    drawAll();
 }
 
 void Heading_Indicator::update()
@@ -165,20 +166,17 @@ void Heading_Indicator::drawAll()
 void Heading_Indicator::setHeading(float value)
 {
     heading = value * -1.0;  // Direction is reversed compared to the sim
-    setPowerSaveMode(false);
 }
 
 void Heading_Indicator::setHeadingBug(float value)
 {
     hdgBug = value;
-    setPowerSaveMode(false);
 }
 
 void Heading_Indicator::setInstrumentBrightnessRatio(float ratio)
 {
   instrumentBrightnessRatio = ratio;
   instrumentBrightness = round(scaleValue(instrumentBrightnessRatio, 0, 1, 0, 255));
-  setPowerSaveMode(false);
 }
 
 void Heading_Indicator::setScreenRotation(int rotation)
