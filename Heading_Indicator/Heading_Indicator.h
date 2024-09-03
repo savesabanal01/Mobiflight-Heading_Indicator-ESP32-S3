@@ -30,5 +30,6 @@ private:
     void setHeadingBug(float value);
     void setInstrumentBrightnessRatio(float ratio);
     void setScreenRotation(int rotation);
+    void setPowerSaveMode(bool enabled);
     float scaleValue(float x, float in_min, float in_max, float out_min, float out_max);
 };

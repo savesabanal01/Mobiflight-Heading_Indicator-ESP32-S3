@@ -97,7 +97,12 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
     switch (messageID) {
     case -1:
         // tbd., get's called when Mobiflight shuts down
+        setPowerSaveMode(true);
     case -2:
+        if (data == 1)
+            setPowerSaveMode(true);
+        else
+            setPowerSaveMode(false);
         // tbd., get's called when PowerSavingMode is entered
     case 0:
         // output = (uint16_t)data;
@@ -124,13 +129,21 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
 void Heading_Indicator::update()
 {
     // Do something which is required regulary
-    analogWrite(TFT_BL, instrumentBrightness);
-    if(prevScreenRotation != screenRotation)
+    if(!powerSaveFlag)
     {
-        tft.setRotation(screenRotation);
-        prevScreenRotation = screenRotation;
+        analogWrite(TFT_BL, instrumentBrightness);
+        if(prevScreenRotation != screenRotation)
+        {
+            tft.setRotation(screenRotation);
+            prevScreenRotation = screenRotation;
+        }
+        drawAll();
     }
-    drawAll();
+    else // clear screen
+    {
+        tft.fillScreen(TFT_BLACK);
+        digitalWrite(TFT_BL, LOW);
+    }
 
     tft.drawString(String("Message ID: ") + String(msg_id), 0, 0, 4);
     tft.drawString(String("Data ID: ") + String(data), 0, 30, 4);
@@ -149,23 +162,39 @@ void Heading_Indicator::drawAll()
 void Heading_Indicator::setHeading(float value)
 {
     heading = value * -1.0;  // Direction is reversed compared to the sim
+    setPowerSaveMode(false);
 }
 
 void Heading_Indicator::setHeadingBug(float value)
 {
     hdgBug = value;
+    setPowerSaveMode(false);
 }
 
 void Heading_Indicator::setInstrumentBrightnessRatio(float ratio)
 {
   instrumentBrightnessRatio = ratio;
   instrumentBrightness = round(scaleValue(instrumentBrightnessRatio, 0, 1, 0, 255));
+  setPowerSaveMode(false);
 }
 
 void Heading_Indicator::setScreenRotation(int rotation)
 {
   if(rotation == 1 || rotation == 3)
     screenRotation = rotation;
+}
+
+
+void Heading_Indicator::setPowerSaveMode(bool enabled)
+{
+    if(enabled)
+    {
+        powerSaveFlag = true;
+    }
+    else
+    {
+        powerSaveFlag = false;
+    }
 }
 
 // Scale function
