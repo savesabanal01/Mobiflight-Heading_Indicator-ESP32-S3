@@ -21,6 +21,9 @@ TFT_eSprite hdgBugSpr = TFT_eSprite(&tft);      // Sprite to hold Heading bug
     Change/add your code as needed.
 ********************************************************************************** */
 
+int data;
+int msg_id;
+
 Heading_Indicator::Heading_Indicator(uint8_t Pin1, uint8_t Pin2)
 {
     _pin1 = Pin1;
@@ -86,8 +89,9 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
         Put in your code to enter this mode (e.g. clear a display)
 
     ********************************************************************************** */
-    int32_t  data = atoi(setPoint);
-    uint16_t output;
+    data = atoi(setPoint);
+    msg_id = messageID;
+    // uint16_t output;
 
     // do something according your messageID
     switch (messageID) {
@@ -127,6 +131,9 @@ void Heading_Indicator::update()
         prevScreenRotation = screenRotation;
     }
     drawAll();
+
+    tft.drawString(String("Message ID: ") + String(msg_id), 0, 0, 4);
+    tft.drawString(String("Data ID: ") + String(data), 0, 30, 4);
 }
 
 void Heading_Indicator::drawAll()
