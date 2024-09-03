@@ -98,11 +98,13 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
     case -1:
         // tbd., get's called when Mobiflight shuts down
         setPowerSaveMode(true);
+        break;
     case -2:
         if (data == 1)
             setPowerSaveMode(true);
         else
             setPowerSaveMode(false);
+        break;
         // tbd., get's called when PowerSavingMode is entered
     case 0:
         // output = (uint16_t)data;
