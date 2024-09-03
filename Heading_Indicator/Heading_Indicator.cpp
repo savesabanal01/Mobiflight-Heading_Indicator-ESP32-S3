@@ -193,10 +193,12 @@ void Heading_Indicator::setPowerSaveMode(bool enabled)
     if(enabled)
     {
         powerSaveFlag = true;
+        digitalWrite(TFT_BL, LOW);
     }
     else
     {
         powerSaveFlag = false;
+        analogWrite(TFT_BL, instrumentBrightness);
     }
 }
 
