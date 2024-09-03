@@ -110,20 +110,21 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
         // output = (uint16_t)data;
         // data   = output;
         setHeading(atof(setPoint));
-        break;
+        // break;
     case 1:
         setHeadingBug(atof(setPoint));
         /* code */
-        break;
+        // break;
     case 2:
         /* code */
         setInstrumentBrightnessRatio(atof(setPoint));
-        break;
+        // break;
     case 100:
         /* code */
         setScreenRotation(atoi(setPoint));
-        break;
+        // break;
     default:
+        drawAll();
         break;
     }
 }
@@ -131,24 +132,24 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
 void Heading_Indicator::update()
 {
     // Do something which is required regulary
-    if(!powerSaveFlag)
-    {
-        analogWrite(TFT_BL, instrumentBrightness);
-        if(prevScreenRotation != screenRotation)
-        {
-            tft.setRotation(screenRotation);
-            prevScreenRotation = screenRotation;
-        }
-        drawAll();
-    }
-    else // clear screen
-    {
-        tft.fillScreen(TFT_BLACK);
-        digitalWrite(TFT_BL, LOW);
-    }
+    // if(!powerSaveFlag)
+    // {
+    //     analogWrite(TFT_BL, instrumentBrightness);
+    //     if(prevScreenRotation != screenRotation)
+    //     {
+    //         tft.setRotation(screenRotation);
+    //         prevScreenRotation = screenRotation;
+    //     }
+    //     drawAll();
+    // }
+    // else // clear screen
+    // {
+    //     tft.fillScreen(TFT_BLACK);
+    //     digitalWrite(TFT_BL, LOW);
+    // }
 
-    tft.drawString(String("Message ID: ") + String(msg_id), 0, 0, 4);
-    tft.drawString(String("Data ID: ") + String(data), 0, 30, 4);
+    // tft.drawString(String("Message ID: ") + String(msg_id), 0, 0, 4);
+    // tft.drawString(String("Data ID: ") + String(data), 0, 30, 4);
 }
 
 void Heading_Indicator::drawAll()
