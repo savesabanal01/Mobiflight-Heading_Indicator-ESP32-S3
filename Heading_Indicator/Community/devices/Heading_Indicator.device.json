@@ -27,7 +27,7 @@
         "description": "$ will be displayed as Heading Bug value"
       },
       {
-        "id": 1,
+        "id": 2,
         "label": "Show Instrument Brightness Value",
         "description": "$ will be displayed as Instrument Brightness value"
       },

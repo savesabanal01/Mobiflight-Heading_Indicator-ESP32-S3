@@ -120,6 +120,12 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
 void Heading_Indicator::update()
 {
     // Do something which is required regulary
+    analogWrite(TFT_BL, instrumentBrightness);
+    if(prevScreenRotation != screenRotation)
+    {
+        tft.setRotation(screenRotation);
+        prevScreenRotation = screenRotation;
+    }
     drawAll();
 }
 
@@ -127,7 +133,7 @@ void Heading_Indicator::drawAll()
 {
   mainGaugeSpr.pushImage(0, 0, 320, 320, main_gauge);
   compassRoseSpr.pushRotated(&mainGaugeSpr, heading, TFT_BLACK);
-  hdgBugSpr.pushRotated(&mainGaugeSpr, hdgBug, TFT_BLACK);
+  hdgBugSpr.pushRotated(&compassRoseSpr, hdgBug, TFT_BLACK);
 
   mainGaugeSpr.pushSprite(80, 0);
   mainGaugeSpr.fillSprite(TFT_BLACK);
@@ -135,7 +141,7 @@ void Heading_Indicator::drawAll()
 
 void Heading_Indicator::setHeading(float value)
 {
-    heading = value;
+    heading = value * -1.0;  // Direction is reversed compared to the sim
 }
 
 void Heading_Indicator::setHeadingBug(float value)
