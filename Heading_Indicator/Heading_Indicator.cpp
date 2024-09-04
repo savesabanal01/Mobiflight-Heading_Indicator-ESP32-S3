@@ -37,7 +37,7 @@ void Heading_Indicator::begin()
   digitalWrite(LED_BUILTIN, LOW);
 
   tft.begin();
-  tft.setRotation(3);
+  tft.setRotation(1);
   tft.fillScreen(PANEL_COLOR);
   tft.setPivot(320, 160);
   tft.setSwapBytes(true);
@@ -132,25 +132,16 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
 
 void Heading_Indicator::update()
 {
-    // Do something which is required regulary
-    // if(!powerSaveFlag)
-    // {
-    //     analogWrite(TFT_BL, instrumentBrightness);
-    //     if(prevScreenRotation != screenRotation)
-    //     {
-    //         tft.setRotation(screenRotation);
-    //         prevScreenRotation = screenRotation;
-    //     }
-    //     drawAll();
-    // }
-    // else // clear screen
-    // {
-    //     tft.fillScreen(TFT_BLACK);
-    //     digitalWrite(TFT_BL, LOW);
-    // }
 
-    // tft.drawString(String("Message ID: ") + String(msg_id), 0, 0, 4);
-    // tft.drawString(String("Data ID: ") + String(data), 0, 30, 4);
+
+        analogWrite(TFT_BL, instrumentBrightness);
+        if(prevScreenRotation != screenRotation)
+        {
+            tft.setRotation(screenRotation);
+            prevScreenRotation = screenRotation;
+        }
+        drawAll();
+    
 }
 
 void Heading_Indicator::drawAll()
