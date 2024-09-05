@@ -22,7 +22,7 @@ TFT_eSprite hdgBugSpr = TFT_eSprite(&tft);      // Sprite to hold Heading bug
 ********************************************************************************** */
 
 int data;
-int msg_id;
+
 
 Heading_Indicator::Heading_Indicator(uint8_t Pin1, uint8_t Pin2)
 {
@@ -37,7 +37,7 @@ void Heading_Indicator::begin()
   digitalWrite(LED_BUILTIN, LOW);
 
   tft.begin();
-  tft.setRotation(1);
+  tft.setRotation(screenRotation);
   tft.fillScreen(PANEL_COLOR);
   tft.setPivot(320, 160);
   tft.setSwapBytes(true);
@@ -89,8 +89,8 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
         Put in your code to enter this mode (e.g. clear a display)
 
     ********************************************************************************** */
-    data = atoi(setPoint);
-    msg_id = messageID;
+    uint16_t data  = atoi(setPoint);
+
     // uint16_t output;
 
     // do something according your messageID
@@ -126,13 +126,10 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
     default:
         break;
     }
-    analogWrite(TFT_BL, instrumentBrightness);
-    drawAll();
 }
 
 void Heading_Indicator::update()
 {
-
 
         analogWrite(TFT_BL, instrumentBrightness);
         if(prevScreenRotation != screenRotation)
@@ -182,12 +179,10 @@ void Heading_Indicator::setPowerSaveMode(bool enabled)
     if(enabled)
     {
         powerSaveFlag = true;
-        digitalWrite(TFT_BL, LOW);
     }
     else
     {
         powerSaveFlag = false;
-        analogWrite(TFT_BL, instrumentBrightness);
     }
 }
 
