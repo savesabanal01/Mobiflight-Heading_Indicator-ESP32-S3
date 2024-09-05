@@ -152,10 +152,12 @@ void Heading_Indicator::update()
 void Heading_Indicator::drawAll()
 {
   mainGaugeSpr.pushImage(0, 0, 320, 320, main_gauge);
+  compassRoseSpr.pushImage(0, 0, 320, 320, compass_rose);
+  hdgBugSpr.pushRotated(&compassRoseSpr, hdgBug, TFT_BLACK);
   compassRoseSpr.pushRotated(&mainGaugeSpr, heading, TFT_BLACK);
-  hdgBugSpr.pushRotated(&mainGaugeSpr, heading + hdgBug, TFT_BLACK);
 
   mainGaugeSpr.pushSprite(80, 0);
+  compassRoseSpr.fillSprite(TFT_BLACK);
   mainGaugeSpr.fillSprite(TFT_BLACK);
 }
 
