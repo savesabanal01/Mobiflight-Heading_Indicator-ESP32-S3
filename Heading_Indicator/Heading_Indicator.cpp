@@ -126,11 +126,7 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
     default:
         break;
     }
-}
-
-void Heading_Indicator::update()
-{
-
+    
     analogWrite(TFT_BL, instrumentBrightness);
     if(prevScreenRotation != screenRotation)
     {
@@ -138,6 +134,18 @@ void Heading_Indicator::update()
         prevScreenRotation = screenRotation;
     }
     drawAll();
+}
+
+void Heading_Indicator::update()
+{
+
+    // analogWrite(TFT_BL, instrumentBrightness);
+    // if(prevScreenRotation != screenRotation)
+    // {
+    //     tft.setRotation(screenRotation);
+    //     prevScreenRotation = screenRotation;
+    // }
+    // drawAll();
     
 }
 
