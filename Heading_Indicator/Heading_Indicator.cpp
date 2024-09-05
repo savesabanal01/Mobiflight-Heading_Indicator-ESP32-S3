@@ -131,13 +131,13 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
 void Heading_Indicator::update()
 {
 
-        analogWrite(TFT_BL, instrumentBrightness);
-        if(prevScreenRotation != screenRotation)
-        {
-            tft.setRotation(screenRotation);
-            prevScreenRotation = screenRotation;
-        }
-        drawAll();
+    analogWrite(TFT_BL, instrumentBrightness);
+    if(prevScreenRotation != screenRotation)
+    {
+        tft.setRotation(screenRotation);
+        prevScreenRotation = screenRotation;
+    }
+    drawAll();
     
 }
 
