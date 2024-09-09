@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MobiflightConnector>
+  <outputs>
+    <config guid="c68c662c-1174-4cde-8eb0-11897b011180">
+      <active>true</active>
+      <description>Heading</description>
+      <settings msdata:InstanceType="MobiFlight.OutputConfigItem, MFConnector, Version=10.3.0.0, Culture=neutral, PublicKeyToken=null" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <source type="XplaneDataRef" path="sim/cockpit2/gauges/indicators/heading_vacuum_deg_mag_pilot" />
+        <test type="Float" value="1" />
+        <modifiers />
+        <display type="CustomDevice" serial="Heading_Indicator ESP32-S3/ SN-48CA439B5068" trigger="normal" customType="" customName="Heading Indicato" messageType="0" value="$" />
+        <preconditions />
+        <configrefs />
+      </settings>
+    </config>
+    <config guid="4ed9e6ea-a8b4-48cb-89f7-857f3ff05ff0">
+      <active>true</active>
+      <description>Heading Bug</description>
+      <settings msdata:InstanceType="MobiFlight.OutputConfigItem, MFConnector, Version=10.3.0.0, Culture=neutral, PublicKeyToken=null" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <source type="XplaneDataRef" path="sim/cockpit/autopilot/heading_mag" />
+        <test type="Float" value="1" />
+        <modifiers />
+        <display type="CustomDevice" serial="Heading_Indicator ESP32-S3/ SN-48CA439B5068" trigger="normal" customType="" customName="Heading Indicato" messageType="1" value="$" />
+        <preconditions />
+        <configrefs />
+      </settings>
+    </config>
+    <config guid="85862f47-b1d2-4b02-b2f3-fbfb61ceef81">
+      <active>true</active>
+      <description>Instrument Brightness</description>
+      <settings msdata:InstanceType="MobiFlight.OutputConfigItem, MFConnector, Version=10.3.0.0, Culture=neutral, PublicKeyToken=null" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <source type="XplaneDataRef" path="sim/cockpit2/electrical/instrument_brightness_ratio_manual[1]" />
+        <test type="Float" value="1" />
+        <modifiers />
+        <display type="CustomDevice" serial="Heading_Indicator ESP32-S3/ SN-48CA439B5068" trigger="normal" customType="" customName="Heading Indicato" messageType="2" value="$" />
+        <preconditions />
+        <configrefs />
+      </settings>
+    </config>
+    <config guid="e79bc14b-0b62-4a4c-b2d8-098cb987185d">
+      <active>true</active>
+      <description>Screen Rotation</description>
+      <settings msdata:InstanceType="MobiFlight.OutputConfigItem, MFConnector, Version=10.3.0.0, Culture=neutral, PublicKeyToken=null" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <source type="Variable" varType="number" varName="ScreenRotation" varExpression="$" />
+        <test type="Float" value="1" />
+        <modifiers>
+          <transformation active="True" expression="1" />
+        </modifiers>
+        <display type="CustomDevice" serial="Heading_Indicator ESP32-S3/ SN-48CA439B5068" trigger="normal" customType="" customName="Heading Indicato" messageType="100" value="$" />
+        <preconditions />
+        <configrefs />
+      </settings>
+    </config>
+  </outputs>
+  <inputs>
+    <config guid="14f47112-beb4-42fd-a1fc-375a4ab7641b">
+      <active>true</active>
+      <description>DG Sync</description>
+      <settings msdata:InstanceType="MobiFlight.InputConfigItem, MFConnector, Version=10.3.0.0, Culture=neutral, PublicKeyToken=null" serial="Heading_Indicator ESP32-S3/ SN-48CA439B5068" name="DG Sync" type="Encoder" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <encoder>
+          <onLeft type="XplaneInputAction" inputType="Command" path="sim/instruments/DG_sync_up" expression="" />
+          <onLeftFast type="XplaneInputAction" inputType="Command" path="sim/instruments/DG_sync_up" expression="" />
+          <onRight type="XplaneInputAction" inputType="Command" path="sim/instruments/DG_sync_down" expression="" />
+          <onRightFast type="XplaneInputAction" inputType="Command" path="sim/instruments/DG_sync_down" expression="" />
+        </encoder>
+        <preconditions />
+        <configrefs />
+      </settings>
+    </config>
+    <config guid="73529f58-2aa8-4829-b55b-ee7ead21f57d">
+      <active>true</active>
+      <description>Heading Sync</description>
+      <settings msdata:InstanceType="MobiFlight.InputConfigItem, MFConnector, Version=10.3.0.0, Culture=neutral, PublicKeyToken=null" serial="Heading_Indicator ESP32-S3/ SN-48CA439B5068" name="Heading Sync" type="Encoder" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <encoder>
+          <onLeft type="XplaneInputAction" inputType="Command" path="sim/autopilot/heading_down" expression="" />
+          <onLeftFast type="XplaneInputAction" inputType="Command" path="sim/autopilot/heading_down" expression="" />
+          <onRight type="XplaneInputAction" inputType="Command" path="sim/autopilot/heading_up" expression="" />
+          <onRightFast type="XplaneInputAction" inputType="Command" path="sim/autopilot/heading_up" expression="" />
+        </encoder>
+        <preconditions />
+        <configrefs />
+      </settings>
+    </config>
+  </inputs>
+</MobiflightConnector>

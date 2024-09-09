@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ModuleType>Heading_Indicator_ESP32-S3</ModuleType>
+  <ModuleName>Heading_Indicator ESP32-S3</ModuleName>
+  <PowerSavingTime>600</PowerSavingTime>
+  <CustomDevice Name="Heading Indicato" CustomType="Heading_Indicator" Pins="15|16|17" Config="">
+    <ConfiguredPins>
+      <string>15</string>
+      <string>16</string>
+      <string>17</string>
+    </ConfiguredPins>
+  </CustomDevice>
+  <Encoder Name="DG Sync" PinLeft="3" PinRight="4" EncoderType="2" />
+  <Encoder Name="Heading Sync" PinLeft="10" PinRight="11" EncoderType="2" />
+</Config>

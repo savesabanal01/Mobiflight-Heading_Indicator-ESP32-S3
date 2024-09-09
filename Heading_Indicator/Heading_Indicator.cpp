@@ -100,10 +100,7 @@ void Heading_Indicator::set(int16_t messageID, char *setPoint)
         setPowerSaveMode(true);
         break;
     case -2:
-        if (data == 1)
-            setPowerSaveMode(true);
-        else
-            setPowerSaveMode(false);
+        setPowerSaveMode((bool) atoi(setPoint));
         break;
         // tbd., get's called when PowerSavingMode is entered
     case 0:
@@ -145,7 +142,18 @@ void Heading_Indicator::update()
         tft.setRotation(screenRotation);
         prevScreenRotation = screenRotation;
     }
-    drawAll();
+
+
+    if (screenRotation == 1 || screenRotation == 3)
+    {
+        tft.setViewport(80, 0, 320, 320);
+        drawAll();
+    }
+    else if (screenRotation == 0 || screenRotation == 2)
+    {
+        tft.setViewport(0, 80, 320, 320);
+        drawAll();
+    }
     
 }
 
@@ -156,9 +164,10 @@ void Heading_Indicator::drawAll()
   hdgBugSpr.pushRotated(&compassRoseSpr, hdgBug, TFT_BLACK);
   compassRoseSpr.pushRotated(&mainGaugeSpr, heading, TFT_BLACK);
 
-  mainGaugeSpr.pushSprite(80, 0);
+  mainGaugeSpr.pushSprite(0, 0);
   compassRoseSpr.fillSprite(TFT_BLACK);
   mainGaugeSpr.fillSprite(TFT_BLACK);
+  
 }
 
 void Heading_Indicator::setHeading(float value)
@@ -179,7 +188,7 @@ void Heading_Indicator::setInstrumentBrightnessRatio(float ratio)
 
 void Heading_Indicator::setScreenRotation(int rotation)
 {
-  if(rotation == 1 || rotation == 3)
+  if(rotation >= 0 && rotation <= 3)
     screenRotation = rotation;
 }
 
@@ -188,10 +197,13 @@ void Heading_Indicator::setPowerSaveMode(bool enabled)
 {
     if(enabled)
     {
+        digitalWrite(TFT_BL, LOW);
+        tft.fillScreen(TFT_BLACK);
         powerSaveFlag = true;
     }
     else
     {
+        analogWrite(TFT_BL, instrumentBrightness);
         powerSaveFlag = false;
     }
 }
